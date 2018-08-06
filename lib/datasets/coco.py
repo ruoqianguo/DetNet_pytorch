@@ -101,8 +101,10 @@ class coco(imdb):
     """
     # Example image path for index=119993:
     #   images/train2014/COCO_train2014_000000119993.jpg
-    file_name = ('COCO_' + self._data_name + '_' +
-                 str(index).zfill(12) + '.jpg')
+    # file_name = ('COCO_' + self._data_name + '_' +
+    #              str(index).zfill(12) + '.jpg')
+    #   images/train2017/000000119993.jpg
+    file_name = (str(index).zfill(12) + '.jpg')
     image_path = osp.join(self._data_path, 'images',
                           self._data_name, file_name)
     assert osp.exists(image_path), \

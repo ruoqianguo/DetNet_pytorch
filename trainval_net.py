@@ -192,10 +192,10 @@ if __name__ == '__main__':
         args.set_cfgs = ['FPN_ANCHOR_SCALES', '[32, 64, 128, 256, 512]', 'FPN_FEAT_STRIDES', '[4, 8, 16, 16, 16]',
                          'MAX_NUM_GT_BOXES', '20']
     elif args.dataset == "coco":
-        args.imdb_name = "coco_2014_train+coco_2014_valminusminival"
-        args.imdbval_name = "coco_2014_minival"
-        args.set_cfgs = ['FPN_ANCHOR_SCALES', '[32, 64, 128, 256, 512]', 'FPN_FEAT_STRIDES', '[4, 8, 16, 32, 64]',
-                         'MAX_NUM_GT_BOXES', '20']
+        args.imdb_name = "coco_2017_train"
+        args.imdbval_name = "coco_2017_val"
+        args.set_cfgs = ['FPN_ANCHOR_SCALES', '[32, 64, 128, 256, 512]', 'FPN_FEAT_STRIDES', '[4, 8, 16, 16, 16]',
+                         'ANCHOR_SCALES', '[4, 8, 16, 32]', 'ANCHOR_RATIOS', '[0.5,1,2]', 'MAX_NUM_GT_BOXES', '50']
     elif args.dataset == "imagenet":
         args.imdb_name = "imagenet_train"
         args.imdbval_name = "imagenet_val"

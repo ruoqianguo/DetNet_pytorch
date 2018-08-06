@@ -42,6 +42,12 @@ for year in ['2015']:
     name = 'coco_{}_{}'.format(year, split)
     __sets[name] = (lambda split=split, year=year: coco(split, year))
 
+# Set up coco_2017_<split>
+for year in ['2017']:
+  for split in ['train', 'val']:
+    name = 'coco_{}_{}'.format(year, split)
+    __sets[name] = (lambda split=split, year=year: coco(split, year))
+
 # Set up vg_<split>
 # for version in ['1600-400-20']:
 #     for split in ['minitrain', 'train', 'minival', 'val', 'test']:
