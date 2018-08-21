@@ -6,6 +6,10 @@ Firstly, I spent about one week training detnet59 on the ImageNet dataset .The c
 
 Based on [**FPN_Pytorch**](https://github.com/guoruoqian/FPN_Pytorch/), i change FPN101 to detnet59.
 
+**Update 2018/8/21**
+
+**train and test on COCO2017 !**
+
 **Update**
 
 **Adding soft_nms.**  **Without requiring any re-training of existing models.** You only need to use soft_nms during testing to bring performance improvements. 
@@ -37,6 +41,12 @@ I benchmark this code thoroughly on pascal voc2007 and 07+12. Below are the resu
 | [DetNet59](https://www.dropbox.com/home/DetNet/PASCAL%20VOC%2007%2B12?preview=fpn_1_7_33101.pth) | 1 GTX 1080 (Ti) | 1          | 1e-3 | 10       | 12        | 2.33hr      | 8015MB     | 80.7 |
 | ResNet-101(**using soft_nms when testing**)                  | 1 GTX 1080 (Ti) | \          | \    | \        | \         | \           | \          | 81.2 |
 | DetNet59(**using soft_nms when testing**)                    | 1 GTX 1080 (Ti) | \          | \    | \        | \         | \           | \          | 81.6 |
+
+3). COCO2017 (Train/Test:COCO2017train/COCO2017val, scale=800, max_size=1200，ROI Align)
+
+| model                                                        | #GPUs | batch size | lr   | lr_decay | max_epoch | time/epoch | mem/GPU | mAP  |
+| ------------------------------------------------------------ | ----- | ---------- | ---- | -------- | --------- | ---------- | ------- | ---- |
+| [DetNet59](https://1drv.ms/u/s!AiHdFv3GrokYhU2WdxmwcK9RK_gW) | 2     | 4          | 4e-3 | 4        | 11        | \          | 9000    | 36.0 |
 
 ## Preparation
 
@@ -126,6 +136,18 @@ train voc07+12:
 ```shell
 CUDA_VISIBLE_DEVICES=3 python3 trainval_net.py exp_name2 --dataset pascal_voc_0712 --net detnet59 --bs 1 --nw 4 --lr 1e-3 --epochs 12 --save_dir weights --cuda --use_tfboard True
 ```
+train coco:
+
+```shell
+CUDA_VISIBLE_DEVICES=6,7 python3 trainval_net.py detnetv1.0 --dataset coco --net detnet59 --bs 4 --nw 4 --lr 4e-3 --epochs 12 --save_dir weights --cuda --lscale --mGPUs
+```
+
+test coco:
+
+```shell
+CUDA_VISIBLE_DEVICES=2 python3 test_net.py detnetv1.0 --dataset coco --net detnet59 --checksession 1 --checkepoch 7 --checkpoint 58632 --cuda --load_dir weights --ls
+```
+
 ### TODO
 
-- Train and test on COCO
+- Train and test on COCO(**Done**)
