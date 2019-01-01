@@ -6,6 +6,10 @@ Firstly, I spent about one week training detnet59 on the ImageNet dataset .The c
 
 Based on [**FPN_Pytorch**](https://github.com/guoruoqian/FPN_Pytorch/), i change FPN101 to detnet59.
 
+**Update 2019/01/01**
+
+**Fix bugs in demo.py. Now you can run demo.py**. **Note the default demo.py merely support pascal_voc categories.**  You need to change the ```pascal_classes``` in demo.py to adapt your own dataset. If you want to know more details, please see the **usage** part.
+
 **Update 2018/8/21**
 
 **train and test on COCO2017 !**
@@ -121,6 +125,14 @@ test voc2007:
 
 ```shell
 CUDA_VISIBLE_DEVICES=3 python3 test_net.py exp_name --dataset pascal_voc --net detnet59 --checksession 1 --checkepoch 7 --checkpoint 5010 --cuda --load_dir weights
+```
+
+run demo.py :
+
+Before run demo, you must make dictionary 'demo_images' and put images (VOC images) in it. You can download the pretrained model  listed in above tables.  
+
+```shell
+CUDA_VISIBLE_DEVICES=0 python3 demo.py exp_name --dataset pascal_voc --net detnet59 --checksession 1 --checkepoch 7 --checkpoint 5010 --cuda --load_dir weights --image_dir demo_images --result_dir vis_results
 ```
 
 **using soft_nms when testing**:
